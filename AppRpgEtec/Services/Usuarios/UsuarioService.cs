@@ -5,13 +5,13 @@ using System.Text;
 
 namespace AppRpgEtec.Services.Usuarios
 {
-    public class UsuariosServices : Request
+    public class UsuarioService : Request
     {
         private readonly Request _request;
-        private const string _apiUrlBase = "http://xyz.somee.com/RpgApi/Usuarios";
+        private const string apiUrlBase = "http://luizsilva12.somee.com/RpgApi/Usuarios";
         //private const string _apiUrlBase = "http://xyz.azurewebsites.net/Usuarios";
 
-        public UsuariosServices()
+        public UsuarioService()
         {
             _request = new Request();
         }
@@ -19,13 +19,13 @@ namespace AppRpgEtec.Services.Usuarios
         public async Task<Usuario> PostRegistrarUsuarioAsync(Usuario u)
         {
             string urlComplementar = "/Registrar";
-            u.Id = await _request.PostReturnIntAsync(_apiUrlBase + urlComplementar, u, string.Empty);
+            u.Id = await _request.PostReturnIntAsync(apiUrlBase + urlComplementar, u, string.Empty);
             return u;
         }
         public async Task<Usuario> PostAutenticarUsuarioAsync(Usuario u)
         {
             string urlComplementar = "/Autenticar";
-            u = await _request.PostAsync(_apiUrlBase + urlComplementar, u, string.Empty);
+            u = await _request.PostAsync(apiUrlBase + urlComplementar, u, string.Empty);
             return u;
         }
     }
