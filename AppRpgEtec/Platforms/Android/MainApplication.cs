@@ -1,5 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
+using AppRpgEtec.Models;
+using Javax.Security.Auth.Login;
 
 namespace AppRpgEtec
 {

@@ -28,5 +28,8 @@ namespace AppRpgEtec.Services.Usuarios
             u = await _request.PostAsync(apiUrlBase + urlComplementar, u, string.Empty);
             return u;
         }
+
+
+
     }
 }
