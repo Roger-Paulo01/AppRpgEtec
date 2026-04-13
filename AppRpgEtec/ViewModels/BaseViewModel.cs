@@ -9,7 +9,7 @@ namespace AppRpgEtec.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropetyChanged([CallerMemberName] string name = "")
+        public void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
