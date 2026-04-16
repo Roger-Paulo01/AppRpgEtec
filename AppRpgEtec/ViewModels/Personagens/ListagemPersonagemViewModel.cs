@@ -1,5 +1,6 @@
 ﻿using AppRpgEtec.Models;
 using AppRpgEtec.Services.Personagens;
+using AppRpgEtec.ViewModels.Armas;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +33,11 @@ namespace AppRpgEtec.ViewModels.Personagens
                 await Application.Current.MainPage
                     .DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
             }
+        }
+
+        public static implicit operator ListagemPersonagemViewModel(ListagemArmaViewModel v)
+        {
+            throw new NotImplementedException();
         }
     }   
 }

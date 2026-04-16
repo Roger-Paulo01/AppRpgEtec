@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AppRpgEtec.Models.Enuns;
 
-namespace AppRpgEtec.Models.Enuns
+namespace AppRpgEtec.Models
 {
     public class Personagem
     {
