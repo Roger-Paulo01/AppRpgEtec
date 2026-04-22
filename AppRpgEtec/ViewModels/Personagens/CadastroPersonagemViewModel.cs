@@ -1,20 +1,26 @@
 ﻿using AppRpgEtec.Models;
+using AppRpgEtec.Models.Enuns;
 using AppRpgEtec.Services.Personagens;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
 
 namespace AppRpgEtec.ViewModels.Personagens
 {
     public class CadastroPersonagemViewModel : BaseViewModel
     {
         private PersonagemService pService;
+        public ICommand SalvarCommand {  get; }
 
         public CadastroPersonagemViewModel()
         {
             string token = Preferences.Get("UsuarioToken", string.Empty);
             pService = new PersonagemService(token);
+            _ = ObterClasses();
+
+            SalvarCommand = new Command(async () => { await SalvarPersonagem(); });
         }
 
         private int id;
@@ -27,7 +33,7 @@ namespace AppRpgEtec.ViewModels.Personagens
         private int vitorias;
         private int derrotas;
 
-        private int teste;
+
 
         public int Id
         {
@@ -121,7 +127,7 @@ namespace AppRpgEtec.ViewModels.Personagens
 
         private ObservableCollection<TipoClasse> listaTiposClasse;
 
-        public ObservableCollection<TipoClasse> ListaTipoClasse
+        public ObservableCollection<TipoClasse> ListaTiposClasse
         {
             get {  return listaTiposClasse; }
             set
@@ -131,6 +137,69 @@ namespace AppRpgEtec.ViewModels.Personagens
                     listaTiposClasse = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        public async Task ObterClasses()
+        {
+            try 
+            {
+                ListaTiposClasse = new ObservableCollection<TipoClasse>();
+                ListaTiposClasse.Add(new TipoClasse() { Id = 1, Descricao = "Cavaleiro" });
+                ListaTiposClasse.Add(new TipoClasse() { Id = 2, Descricao = "Mago" });
+                ListaTiposClasse.Add(new TipoClasse() { Id = 3, Descricao = "Clerigo" });
+                OnPropertyChanged(nameof(ListaTiposClasse));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "Ok");
+            }
+        }
+
+        private TipoClasse tipoClasseSelecionado;
+        public TipoClasse TipoClasseSelecionado
+        {
+            get { return tipoClasseSelecionado; }
+            set 
+            {
+                if (value != null) 
+                {
+                    tipoClasseSelecionado = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public async Task SalvarPersonagem()
+        {
+            try
+            {
+                Personagem model = new Personagem()
+                {
+                    Nome = this.nome,
+                    PontosVida = this.pontosVida,
+                    Defesa = this.defesa,
+                    Derrotas = this.derrotas,
+                    Disputas = this.disputas,
+                    Forca = this.forca,
+                    Inteligencia = this.inteligencia,
+                    Vitorias = this.vitorias,
+                    Id = this.id,
+                    Classe = (ClasseEnum)tipoClasseSelecionado.Id
+                };
+                if (model.Id == 0)
+                    await pService.PostPersonagemAsync(model);
+
+                await Application.Current.MainPage
+                    .DisplayAlert("Mensagem", "Dados salvos com sucesso!", "Ok");
+
+                await Shell.Current.GoToAsync(".."); //Remove a página atual da pilha de páginas
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "Ok");
             }
         }
 
