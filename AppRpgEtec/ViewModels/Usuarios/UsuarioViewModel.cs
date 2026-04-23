@@ -72,7 +72,7 @@ namespace AppRpgEtec.ViewModels.Usuarios
                     await Application.Current.MainPage
                         .DisplayAlert("Informação", mensagem, "Ok");
 
-                    Application.Current.MainPage = new Views.Armas.ListagemView();
+                    Application.Current.MainPage = new AppShell();
                 }
                 else
                 {
@@ -126,6 +126,5 @@ namespace AppRpgEtec.ViewModels.Usuarios
                     .DisplayAlert("Informação", ex.Message + " Detalhes " + ex.InnerException, "Ok");
             }
         }
-
     }
 }

@@ -7,6 +7,7 @@ namespace AppRpgEtec
         public AppShell()
         {
             InitializeComponent();
+
             Routing.RegisterRoute("cadPersonagemView", typeof(CadastroPersonagemView));
         }
     }
