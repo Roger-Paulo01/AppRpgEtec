@@ -7,14 +7,11 @@
     xmlns:local="clr-namespace:AppRpgEtec"
     Title="AppRpgEtec">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate viewsPersonagens:ListagemPersonagemView}"
+        Title="Login"
+        ContentTemplate="{DataTemplate viewsPersonagens:ListagemView}"
         Route="MainPage" />
 
 </Shell>
