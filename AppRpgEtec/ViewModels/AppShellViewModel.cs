@@ -1,4 +1,5 @@
-﻿using AppRpgEtec.Services.Usuarios;
+﻿using AppRpgEtec.Models;
+using AppRpgEtec.Services.Usuarios;
 using Azure.Storage.Blobs;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,32 @@ namespace AppRpgEtec.ViewModels
                     .DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException.Message, "Ok");
             }
         }
+
+        public async void SalvarImagem()
+        {
+            try
+            {
+                Usuario u = new Usuario();
+                u.Foto = foto;
+                u.Id = Preferences.Get("UsuarioId", 0);
+
+                if (await uService.PutFotoUsuarioAsync(u) != 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Mensgaem", "Dados salvos com sucesso!", "Ok");
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }
+                else { throw new Exception("Erro ao tentar atualizar imagem"); }
+
+            }
+            catch (Exception ex)
+            {
+
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
+            }
+        }
+
+
 
     }
 }
