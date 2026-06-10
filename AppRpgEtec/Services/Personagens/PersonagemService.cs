@@ -35,7 +35,7 @@ namespace AppRpgEtec.Services.Personagens
 
         public async Task<Personagem> GetPersonagemAsync(int personagemId)
         {
-            string urlComplementar = string.Format("/0", personagemId);
+            string urlComplementar = string.Format("/{0}", personagemId);
             var personagem = await _request.GetAsync<Models.Personagem>(apiUrlBase +
                 urlComplementar, _token);
             return personagem;
@@ -52,6 +52,16 @@ namespace AppRpgEtec.Services.Personagens
             string urlComplementar = string.Format("{0}", personagemId);
             var result = await _request.DeleteAsync(apiUrlBase + urlComplementar, _token);
             return result;
+        }
+
+        public async Task<ObservableCollection<Models.Personagem>> GetByNomeAproximadoAsync(string busca)
+        {
+            string urlComplementar = $"/GetByNomeAproximado/{busca}";
+
+            ObservableCollection<Models.Personagem> listaPersonagens = await
+            _request.GetAsync<ObservableCollection<Models.Personagem>>( apiUrlBase + urlComplementar, _token);
+
+            return listaPersonagens;
         }
 
     }

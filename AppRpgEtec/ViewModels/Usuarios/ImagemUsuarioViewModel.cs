@@ -11,7 +11,7 @@ namespace AppRpgEtec.ViewModels.Usuarios
     public class ImagemUsuarioViewModel: BaseViewModel
     {
         private UsuarioService usuarioService;
-        private static string conexaoAzureStorage = ""; //comentar esta linha antes de subir no GitHub
+        private static string conexaoAzureStorage = "" //comentar esta linha antes de subir no GitHub
         private static string container = "arquivos";
         public ImagemUsuarioViewModel()
         {

@@ -84,7 +84,21 @@ namespace AppRpgEtec.ViewModels
             }
         }
 
+        public async void CarregarUsuario()
+        {
+            try
+            {
+                int usuarioId = Preferences.Get("UsuarioId", 0);
+                Usuario u = await uService.GetUsuarioAsync(usuarioId);
 
+                Foto = u.Foto;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + " Detalhes " + ex.InnerException, "Ok");
+            }
+        }
 
     }
 }
