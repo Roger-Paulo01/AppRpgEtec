@@ -12,7 +12,7 @@ namespace AppRpgEtec.Models
         public Habilidade Habilidade { get; set; }
         public string HabilidadeNome
         {
-            get { return HabilidadeNome; }
+            get { return Habilidade.Nome; }
         }
     }
 }
