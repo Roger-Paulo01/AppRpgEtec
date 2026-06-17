@@ -99,7 +99,7 @@ namespace AppRpgEtec.ViewModels.Disputas
             try
             {
                 string tipoCombatente = await Application.Current.MainPage
-                    .DisplayActionSheet("Atacante ou Oponente", "Cancelar", "", "Atacante", "Oponente");
+                    .DisplayActionSheet("Atacante ou Oponente?", "Cancelar", "", "Atacante", "Oponente");
 
                 if (tipoCombatente == "Atacante")
                 {
