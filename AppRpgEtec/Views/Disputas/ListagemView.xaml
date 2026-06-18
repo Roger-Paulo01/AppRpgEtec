@@ -10,7 +10,9 @@
 
         <Entry Placeholder="Digite o nome do Personagem..." Text="{Binding TextoBuscaDigitado}">
         </Entry>
-        
+
+        <Button Text="Zerar Ranking Geral" Command="{Binding ZerarRankingRestaurarVidasGeralCommand}"
+                FontAttributes="Bold" VerticalOptions="FillAndExpand"/>
         <ListView x:Name="lvPersonagens" HasUnevenRows="True" ItemsSource="{Binding
             PersonagensEncontrados}"
                   SelectedItem="{Binding PersonagemSelecionado}"
